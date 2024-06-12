@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chiraaridez Bike Taxi Service</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .video-bg {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+        }
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+        .form-container, .result-container {
+            flex: 1;
+            padding: 20px;
+        }
+        .form-container {
+            border-right: 1px solid #ccc;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            font-size: 18px;
+            color: #333;
+            white-space: pre-line;
+        }
+        .gif-clip {
+            display: none;
+            margin-top: 20px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop class="video-bg">
+        <source src="your-background-video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="container">
+        <div class="form-container">
+            <h1>Chiraaridez Bike Taxi Service</h1>
+            <form id="taxiForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}">
+                
+                <label for="pickup">Pickup Location:</label>
+                <input type="text" id="pickup" name="pickup" required>
+                
+                <label for="dropoff">Drop-off Location:</label>
+                <input type="text" id="dropoff" name="dropoff" required>
+                
+                <label for="distance">Enter Distance (in km):</label>
+                <input type="number" id="distance" name="distance" required>
+                
+                <button type="button" id="calculateBtn">Calculate Fare</button>
+            </form>
+        </div>
+        <div class="result-container">
+            <h1>Fare Calculation Result</h1>
+            <div class="result" id="result"></div>
+            <button type="button" id="callBtn" style="display: none;">Call and Inform</button>
+            <img src="https://i.gifer.com/7iY5.gif" alt="Result GIF" class="gif-clip" id="resultGif">
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('calculateBtn').addEventListener('click', function() {
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const distance = parseFloat(document.getElementById('distance').value);
+            const ratePerKm = 50.00;
+            const fare = distance * ratePerKm;
+            const pickup = document.getElementById('pickup').value;
+            const dropoff = document.getElementById('dropoff').value;
+
+            const resultText = `Name: ${name}\nPhone Number: ${phone}\nTotal Fare: Rs. ${fare.toFixed(2)}\nPickup: ${pickup}\nDrop-off: ${dropoff}`;
+            document.getElementById('result').innerText = resultText;
+
+            // Show the call button
+            document.getElementById('callBtn').style.display = 'block';
+
+            // Show the result GIF
+            document.getElementById('resultGif').style.display = 'block';
+        });
+
+        document.getElementById('callBtn').addEventListener('click', function() {
+            window.location.href = 'tel:0714473744';
+        });
+    </script>
+</body>
+</html>
